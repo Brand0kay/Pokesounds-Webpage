@@ -1,0 +1,60 @@
+﻿@model IList<Pokemon>
+@{
+    ViewData["Title"] = "Index";
+    int i = 1;
+}
+
+<script type="text/javascript">
+    function play(name) {
+        var audio = document.getElementById("audio-" + name);
+        audio.play();
+    }
+</script>
+
+
+<h2>Pokedexicon</h2>
+
+
+<div id="Pokemons">
+
+    @foreach (var Pokemon in Model)
+    {
+        <div class="Pokemon">
+            @{
+
+            }
+
+            @if (i < 10)
+            {
+                <h3># 00@(i) | @Pokemon.Name </h3>
+            }
+            @if (i < 100 & i >= 10)
+            {
+                <h3># 0@(i) | @Pokemon.Name </h3>
+            }
+            @if (i > 100)
+            {
+                <h3># @i | @Pokemon.Name </h3>
+            }
+
+
+            <img class="sprite" src="~/images/@(i).png" alt="@(i) | @Pokemon.Name" value="PLAY" onclick="play('@Pokemon.Name')">
+
+            @if (i < 10)
+            {
+                <audio id="audio-@Pokemon.Name" src="~/Audio/00@(i) - @(Pokemon.Name).wav"></audio>
+            }
+            @if (i < 100 & i >= 10)
+            {
+                <audio id="audio-@Pokemon.Name" src="~/Audio/0@(i) - @(Pokemon.Name).wav"></audio>
+            }
+            @if (i > 100)
+            {
+                <audio id="audio-@Pokemon.Name" src="~/Audio/@(i) - @(Pokemon.Name).wav"></audio>
+            }
+            @{
+                i++;
+            }
+        </div>
+    }
+</div>
